@@ -30,4 +30,8 @@ export class UsersService {
     await this.findOne(id);
     return this.prisma.user.delete({ where: { id } });
   }
+
+  updatePhoto(id: number, photoUrl: string) {
+    return this.prisma.user.update({ where: { id }, data: { photoUrl } });
+  }
 }

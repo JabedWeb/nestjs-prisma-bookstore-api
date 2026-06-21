@@ -34,4 +34,8 @@ export class StudentsService {
     await this.findOne(id);
     return this.prisma.student.delete({ where: { id } });
   }
+
+  updatePhoto(id: number, photoUrl: string) {
+    return this.prisma.student.update({ where: { id }, data: { photoUrl } });
+  }
 }

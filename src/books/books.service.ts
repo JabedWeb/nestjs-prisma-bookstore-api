@@ -39,4 +39,12 @@ export class BooksService {
     await this.findOne(id);
     return this.prisma.book.delete({ where: { id } });
   }
+
+  async addImages(id: number, urls: string[]) {
+    const book = await this.findOne(id);
+    return this.prisma.book.update({
+      where: { id },
+      data: { images: [...book.images, ...urls] },
+    });
+  }
 }
