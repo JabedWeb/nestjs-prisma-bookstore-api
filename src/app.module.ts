@@ -4,9 +4,10 @@ import { UsersModule } from './users/users.module';
 import { BooksModule } from './books/books.module';
 import { StudentsModule } from './students/students.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
-  imports: [PrismaModule, UsersModule, BooksModule, StudentsModule, CloudinaryModule],
+  imports: [PrismaModule, UsersModule, BooksModule, StudentsModule, CloudinaryModule, OrdersModule],
   controllers: [],
   providers: [],
 })

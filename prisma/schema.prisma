@@ -18,9 +18,11 @@ model User {
 model Student {
   id        Int      @id @default(autoincrement())
   name      String
-  photoUrl  String?
   email     String   @unique
+  phone     String?  @unique
+  photoUrl  String?
   createdAt DateTime @default(now())
+  orders    Order[]
 }
 
 model Book {
@@ -29,9 +31,29 @@ model Book {
   author    String
   isbn      String?  @unique
   images    String[]
+  stock     Int      @default(0)
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
+  orders    Order[]
   createdAt DateTime @default(now())
 }
 
+enum OrderStatus {
+  PENDING
+  APPROVED
+  RETURNED
+  CANCELLED
+}
+
+model Order {
+  id         Int         @id @default(autoincrement())
+  studentId  Int
+  student    Student     @relation(fields: [studentId], references: [id])
+  bookId     Int
+  book       Book        @relation(fields: [bookId], references: [id])
+  status     OrderStatus @default(PENDING)
+  orderDate  DateTime    @default(now())
+  returnDate DateTime?
+  createdAt  DateTime    @default(now())
+}
 

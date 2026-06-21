@@ -11,8 +11,13 @@ export class StudentsService {
     return this.prisma.student.create({ data: createStudentDto });
   }
 
-  findAll() {
-    return this.prisma.student.findMany();
+  findAll(email?: string, phone?: string) {
+    return this.prisma.student.findMany({
+      where: {
+        email: email ? { contains: email, mode: 'insensitive' } : undefined,
+        phone: phone ? { contains: phone } : undefined,
+      },
+    });
   }
 
   async findOne(id: number) {
